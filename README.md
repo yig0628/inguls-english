@@ -1,6 +1,6 @@
 # INGUL’S English · Render에 설치형 웹앱 배포
 
-이 소스는 안드로이드 홈 화면에 설치하는 PWA입니다. 세일즈·마케팅 팀장 코스, T-health Solution 시연, Chemist Warehouse 본사 미팅, 녹음·재생, 기준표 교정, 복습을 포함합니다. 서버는 비밀번호로 앱 접근을 제한합니다. 학습 기록은 브라우저의 이 주소에 저장됩니다.
+이 소스는 안드로이드 홈 화면에 설치하는 PWA입니다. 세일즈·마케팅 팀장 코스, T-health Solution 시연, Chemist Warehouse 본사 미팅, 녹음·재생, 기준표 교정, 복습을 포함합니다. 공유 링크를 열면 학습 화면으로 들어갑니다. 학습 기록은 브라우저의 이 주소에 저장됩니다.
 
 제품과 바이어 미팅에 나오는 거래 조건·마진·전국 확대 계획은 영어 연습을 위한 가상 시나리오입니다.
 
@@ -8,11 +8,11 @@
 
 1. ZIP을 풀고 `yig0628/inguls-english`의 **Add file → Upload files**에서 압축을 푼 폴더의 내용물을 올립니다. `render.yaml`, `package.json`, `src/`, `public/`이 저장소의 최상위에 오게 하고 `main`에 커밋합니다.
 2. Render 대시보드의 **New → Blueprint**로 들어가 GitHub와 연결한 뒤 이 저장소의 `main` 브랜치를 선택합니다.
-3. `APP_ACCESS_PASSWORD`에는 앱을 열 때 쓸 12자 이상의 별도 비밀번호를 입력합니다. `APP_SESSION_SECRET`은 Render가 생성합니다. `render.yaml`은 무료 웹 서비스 한 개를 선언합니다.
-4. **Deploy Blueprint** 후 Render가 알려주는 HTTPS 주소를 열어 앱 비밀번호로 들어갑니다.
+3. `render.yaml`의 무료 웹 서비스 구성을 확인합니다.
+4. **Deploy Blueprint** 후 Render가 알려주는 HTTPS 주소를 열면 학습 화면이 나옵니다.
 5. Android Chrome에서 이 주소를 처음 열고 메뉴에서 **설치 및 바로가기 만들기 → 설치**를 누릅니다. 이후 홈 화면의 **INGUL ENGLISH** 아이콘으로 엽니다. 첫 녹음 때 마이크 권한 요청이 나오면 허용합니다. Render의 HTTPS 주소를 공유하면, 링크 미리보기를 지원하는 메신저의 공유 카드에 `public/share-cover.png`를 사용합니다.
 
-Blueprint 대신 **New → Web Service**를 사용할 때는 Runtime을 Node, Instance Type을 Free, Build Command를 `npm ci && npm run build`, Start Command를 `npm start`, Health Check Path를 `/healthz`로 설정합니다. 환경 변수 `APP_ACCESS_PASSWORD`와 32자 이상 무작위 `APP_SESSION_SECRET`을 Render에 입력합니다. 비밀번호와 세션 키는 저장소에 올리지 마세요. 코드는 기본적으로 인증된 방문자에게만 제공됩니다.
+Blueprint 대신 **New → Web Service**를 사용할 때는 Runtime을 Node, Instance Type을 Free, Build Command를 `npm ci && npm run build`, Start Command를 `npm start`, Health Check Path를 `/healthz`로 설정합니다.
 
 ## Sites 기록을 옮기는 방법
 
@@ -22,7 +22,7 @@ Blueprint 대신 **New → Web Service**를 사용할 때는 Runtime을 Node, In
 
 ## 로컬 실행
 
-Node.js 22.13 이상에서 `npm ci`, `npm run build`를 실행합니다. `APP_ACCESS_PASSWORD`와 `APP_SESSION_SECRET`을 셸 환경 변수로 설정한 뒤 `npm start`를 실행합니다. 기본 주소는 `http://localhost:4174/`입니다.
+Node.js 22.13 이상에서 `npm ci`, `npm run build`, `npm start`를 차례로 실행합니다. 기본 주소는 `http://localhost:4174/`입니다.
 
 ## 말하기 도움과 챌린지
 
