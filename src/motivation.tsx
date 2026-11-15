@@ -3,6 +3,7 @@ import { Bell, Flame, Gift, Download } from "lucide-react";
 import { addDays, allCards, dayKey, topicName, weekday } from "./content";
 import { isComplete, type Data } from "./learning";
 import bonus from "./reward-sentences.json";
+import { DeviceReminders } from "./push";
 
 const price=1000;
 const reward="business-100";
@@ -105,8 +106,8 @@ export function Reminder({completed,onOpen}:{completed:boolean;onOpen:()=>void})
       {due&&<p>오늘의 10문장 학습지를 열어 보세요.</p>}
       <label><input type="checkbox" checked={enabled} onChange={e=>{setEnabled(e.target.checked);localStorage.setItem(enabledKey,e.target.checked?"on":"off");}}/> 앱 상단 알림</label>
       <button className="link-btn" onClick={async()=>{try{audio.current??=new AudioContext();await audio.current.resume();ring();}catch{}}}>앱을 열어 둔 동안 알림음 켜기</button>
+      <DeviceReminders/>
       <button className="btn secondary" type="button" onClick={calendar}>휴대폰 캘린더 알림 추가</button>
-      <p>앱이 닫혀 있을 때는 내려받은 파일을 캘린더에 추가하고 알림을 허용하세요.</p>
       {due&&<button className="btn primary" onClick={()=>{localStorage.setItem(seenKey,dayKey());setDue(false);setOpen(false);onOpen();}}>확인 · 오늘의 학습지</button>}
     </div>}
   </div>;
