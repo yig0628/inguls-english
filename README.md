@@ -32,6 +32,6 @@ Node.js 22.13 이상에서 `npm ci`, `npm run build`, `npm start`를 차례로 �
 
 상단 종 아이콘에서 **이 기기 알림 켜기 → 허용 → 테스트 알림**으로 기기마다 푸시를 등록합니다. 월~토 오전 9시(한국 시간)에 발송하며 토요일에는 복습 안내를 보냅니다. GitHub 실행 대기에 대비해 09:15·09:35에 재시도하며 발송에 성공한 기기에는 같은 날 중복 발송하지 않습니다. 종 메뉴에서 휴대폰 캘린더 알림과 앱을 열어 둔 동안의 알림음도 사용할 수 있습니다.
 
-예약 푸시를 배포하려면 Render에 이 앱의 전용 PostgreSQL 연결 `PUSH_DATABASE_URL`, VAPID 키 쌍과 발급자 주소(`VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`), 32자 이상의 `PUSH_SCHEDULE_TOKEN`을 추가합니다. GitHub Actions 변수 `INGULS_APP_URL`에는 공개 앱 주소를, Actions 시크릿 `PUSH_SCHEDULE_TOKEN`에는 같은 토큰을 저장합니다. **Morning lesson push**를 수동 실행하면 연결을 확인할 수 있습니다. 공개 저장소가 60일간 비활성 상태면 GitHub가 예약 작업을 중지할 수 있습니다.
+예약 푸시를 배포하려면 Render에 이 앱의 전용 PostgreSQL 연결 `PUSH_DATABASE_URL`, VAPID 키 쌍과 발급자 주소(`VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`), 32자 이상의 `PUSH_SCHEDULE_TOKEN`을 추가합니다. GitHub Actions 변수 `INGULS_APP_URL`에는 공개 앱 주소를, Actions 시크릿 `INGULS_PUSH_SCHEDULE_TOKEN`에는 같은 토큰을 저장합니다. **Morning lesson push**를 수동 실행하면 연결을 확인할 수 있습니다. 공개 저장소가 60일간 비활성 상태면 GitHub가 예약 작업을 중지할 수 있습니다.
 
 하루의 학습을 완료하면 +100P, 평일 3일과 토요일 복습 1세트를 완료하면 추가 +150P입니다. 일요일은 연속 기록에서 제외합니다. 1,000P로 영어·한국어 비즈니스 예문 100선 CSV를 한 번 교환하면 다시 다운로드할 수 있습니다. 백업에는 잠금 해제 여부도 포함됩니다.
