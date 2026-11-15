@@ -2,6 +2,7 @@ import { createReadStream } from "node:fs";
 import { readFile, stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, resolve, sep } from "node:path";
+import { handlePush } from "./push.mjs";
 
 const root = resolve("dist");
 const mime = {
@@ -38,6 +39,7 @@ createServer(async (req,res)=>{
   try {
     const path = decodeURIComponent(new URL(req.url,"http://localhost").pathname);
     if(path==="/healthz")return reply(res,200,"text/plain","ok");
+    if(path.startsWith("/api/push/"))return await handlePush(req,path,(status,body)=>reply(res,status,"application/json; charset=utf-8",JSON.stringify(body)));
     if(!["GET","HEAD"].includes(req.method))return reply(res,405,"text/plain","Method not allowed");
     if(path==="/" || path==="/index.html")return reply(res,200,"text/html; charset=utf-8",req.method==="HEAD" ? "" : appHtml);
     const file = resolve(root, "."+path);
