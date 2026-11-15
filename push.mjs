@@ -1,6 +1,6 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import pg from "pg";
-import webPush from "web-push";
+import { sendNotification } from "web-push";
 
 const databaseUrl = process.env.PUSH_DATABASE_URL;
 const publicKey = process.env.VAPID_PUBLIC_KEY?.trim() ?? "";
@@ -57,7 +57,7 @@ function validSubscription(data) {
 
 async function notify(device, day, message, test = false) {
   try {
-    await webPush.sendNotification({
+    await sendNotification({
       endpoint: device.endpoint, keys: { p256dh: device.p256dh, auth: device.auth },
     }, JSON.stringify({
       title: "INGUL’S English", body: message, tag: test ? "ingul-test" : "ingul-" + day,
