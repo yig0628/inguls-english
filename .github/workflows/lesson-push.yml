@@ -14,12 +14,12 @@ jobs:
     timeout-minutes: 5
     env:
       APP_URL: ${{ vars.INGULS_APP_URL }}
-      PUSH_TOKEN: ${{ secrets.PUSH_SCHEDULE_TOKEN }}
+      PUSH_TOKEN: ${{ secrets.INGULS_PUSH_SCHEDULE_TOKEN }}
     steps:
       - name: Send the morning reminder
         run: |
           if [ -z "$PUSH_TOKEN" ]; then
-            echo "::error::Set PUSH_SCHEDULE_TOKEN before running this job."
+            echo "::error::Set INGULS_PUSH_SCHEDULE_TOKEN before running this job."
             exit 1
           fi
           curl --silent --show-error --fail --max-time 140 --retry 1 --retry-delay 5 \
