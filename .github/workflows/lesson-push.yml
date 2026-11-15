@@ -1,0 +1,26 @@
+name: Morning lesson push
+on:
+  schedule:
+    - cron: '0,15,35 0 * * 1-6'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: inguls-morning-push
+  cancel-in-progress: false
+jobs:
+  notify:
+    if: vars.INGULS_APP_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      APP_URL: ${{ vars.INGULS_APP_URL }}
+      PUSH_TOKEN: ${{ secrets.PUSH_SCHEDULE_TOKEN }}
+    steps:
+      - name: Send the morning reminder
+        run: |
+          if [ -z "$PUSH_TOKEN" ]; then
+            echo "::error::Set PUSH_SCHEDULE_TOKEN before running this job."
+            exit 1
+          fi
+          curl --silent --show-error --fail --max-time 140 --retry 1 --retry-delay 5 \
+            -X POST -H "Authorization: Bearer $PUSH_TOKEN" "${APP_URL%/}/api/push/send"
